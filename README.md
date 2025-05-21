@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🤖 Gemini Chatbot – Project Documentation
 
-First, run the development server:
+A web application that allows users to upload a PDF, ask questions based on its contents, and get responses using Gemini API. Built with Next.js, Supabase, and Tailwind CSS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📁 Project Structure
+
+```
+/app
+  /api
+    gemini.ts         # Handles Gemini API responses
+    upload.ts         # Handles PDF file upload and parsing
+  /chat
+    page.tsx          # Main chat interface with authentication and file upload
+/components
+  ui/                 # Reusable UI components (Button, Input)
+  toast-provider.tsx  # React Hot Toast setup
+/utils
+  supabase/client.ts  # Supabase client initialization
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js** – App routing and frontend logic
+- **Supabase** – Authentication and database
+- **React Hot Toast** – Notifications
+- **Gemini API** – PDF-based LLM responses
+- **Tailwind CSS + Shadcn UI** – Styling and UI components
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ⚙️ API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `POST /api/upload`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Uploads and parses a PDF.
 
-## Deploy on Vercel
+#### Request
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```http
+Content-Type: multipart/form-data
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Response
+
+```json
+{
+  "text": "Extracted text from PDF"
+}
+```
+
+---
+
+### `POST /api/gemini`
+
+Sends a message and PDF context to Gemini API.
+
+#### Body
+
+```json
+{
+  "message": "What is the summary?",
+  "pdfText": "Full PDF text"
+}
+```
+
+#### Response
+
+```json
+{
+  "reply": "Gemini's reply based on the PDF content"
+}
+```
+
+---
+
+## 💬 Components Overview
+
+### `ChatPage`
+
+- Fetches user data
+- Uploads PDF
+- Sends queries to Gemini API
+- Displays chat history
+- Handles logout
+
+### `toast-provider.tsx`
+
+- Initializes Hot Toast with center placement
+
+```tsx
+<Toaster position="top-center" />
+```
+
+Include this in `layout.tsx`:
+
+```tsx
+import { Toaster } from 'react-hot-toast';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <Toaster position="top-center" />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+## ✅ Code Standards
+
+- **JavaScript/TypeScript**: Follows ESLint rules via Next.js defaults.
+- **Components**: Function-based, typed with `use client` directive.
+- **Comments**: All major functions and logic are documented.
+- **Styling**: Tailwind CSS utility classes, consistent with `shadcn/ui`.
+
+---
+
+## 📌 Example Commenting Style
+
+```tsx
+/**
+ * Uploads a PDF, parses it, and sets extracted text
+ */
+const handlePDFUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  ...
+}
+```
