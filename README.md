@@ -4,6 +4,11 @@
 A web application that allows users to upload a PDF, ask questions based on its contents, and get responses using Gemini API. Built with Next.js, Supabase, and Tailwind CSS.
 
 ---
+## 📸 Screenshot
+
+![Gemini Chat UI](https://res.cloudinary.com/de5vcnanx/image/upload/v1747870012/Screenshot_2025-05-22_at_4.53.28_AM_ordviq.png)
+
+![Gemini Chat UI](https://res.cloudinary.com/de5vcnanx/image/upload/v1747870012/Screenshot_2025-05-22_at_4.53.32_AM_z7zypu.png)
 
 ## 📁 Project Structure
 
