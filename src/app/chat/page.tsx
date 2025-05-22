@@ -202,14 +202,15 @@ export default function ChatPage() {
 
       {/* Input */}
       <footer className="p-4 bg-white border-t flex items-center space-x-2">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-          placeholder="Ask something..."
-          className="flex-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+      <input
+  type="text"
+  value={input}
+  onChange={(e) => setInput(e.target.value)}
+  onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+  placeholder="Ask something..."
+  className="flex-1 px-4 py-2 border rounded-md dark:text-black border-black"
+/>
+
         <Button onClick={sendMessage} className="px-4 py-2" variant="default">
           Send
         </Button>
