@@ -25,6 +25,15 @@ export default function ChatPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  //for automatic scrolling using useRef and useEffect hook
+  useEffect(()=>{
+    if(bottomRef.current){
+      bottomRef.current.scrollIntoView({behavior: "smooth"});
+    }
+  },[messages])
+
   useEffect(() => {
     const getUser = async () => {
       const { data: { user }, error } = await supabase.auth.getUser();
@@ -198,6 +207,8 @@ export default function ChatPage() {
             Typing...
           </div>
         )}
+        {/* this is used to perform the automatic scroll using useRef hook */}
+        <div ref={bottomRef} />
       </main>
 
       {/* Input */}
